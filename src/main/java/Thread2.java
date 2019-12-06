@@ -1,12 +1,29 @@
-public class Thread2 implements  Runnable {
+public class Thread2 implements Runnable {
 
-    public synchronized void run(){
-        for(int i=0;i<10;i++){
-            System.out.println(Thread.currentThread().getName()+":"+i);
+    @Override
+    public void run() {
+        synchronized (this) {
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(1000);
+                    if(i == 5){
+                        /**
+                         *  this.notifyAll()放在循环内和放在循环外结果不一样.放在循环外正常执行完毕,循环内死锁.
+                         *  思索原因:放在循环内,只有当i=5的时候才会唤醒,当10次执行完后,例外一个线程并没有被唤醒,
+                         *  而如果放在循环外,每次执行完毕则会执行一次唤醒操作.所以程序会正常执行完毕.
+                         */
+                        this.notifyAll();
+                        this.wait();
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(Thread.currentThread().getName() + ":" + i);
+            }
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
         /**
          *     Thread thread1 = new Thread(new Thread2());
          *     Thread thread2 = new Thread(new Thread2());
@@ -20,5 +37,6 @@ public class Thread2 implements  Runnable {
         Thread thread2 = new Thread(thread3);
         thread1.start();
         thread2.start();
+
     }
 }

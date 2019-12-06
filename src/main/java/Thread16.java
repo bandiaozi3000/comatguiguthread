@@ -9,13 +9,15 @@ public class Thread16 {
     public int count = 0;
 
     public static void main(String[] args) {
-        Thread15 thread15 = new Thread15();
+        Thread16 thread16 = new Thread16();
         CountDownLatch latch = new CountDownLatch(1);
         new Thread(() -> {
             System.out.println("t1 start....");
-            if (thread15.count != 5) {
+            if (thread16.count != 5) {
                 try {
+                    System.out.println("t1 wait....");
                     latch.await();
+                    System.out.println("ti continue ......");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -32,9 +34,9 @@ public class Thread16 {
         new Thread(() -> {
             System.out.println("t2 start....");
             for (int i = 0; i < 10; i++) {
-                thread15.count++;
-                System.out.println(thread15.count);
-                if (thread15.count == 5) {
+                thread16.count++;
+                System.out.println(thread16.count);
+                if (thread16.count == 5) {
                     latch.countDown();
                 }
                 try {

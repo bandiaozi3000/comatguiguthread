@@ -4,7 +4,7 @@
  *      程才会接着执行
  */
 public class Thread6 {
-    public  static synchronized  void m1(){
+    public static synchronized void m1(){
         for(int i = 0 ;i<10; i++){
             System.out.println(Thread.currentThread().getName() + i);
         }
@@ -12,8 +12,7 @@ public class Thread6 {
 
     public static void main(String[] args) {
         for(int i =0;i<3;i++){
-            Thread6 thread6 = new Thread6();
-            new Thread(()->thread6.m1(),"t"+i).start();
+            new Thread(()->Thread6.m1(),"t"+i).start();
         }
     }
 }

@@ -1,6 +1,7 @@
 public class Thread4 implements Runnable {
     private int count = 10;
 
+    @Override
     public synchronized void run() {
         for(int i=0;i<10;i++) {
             count--;

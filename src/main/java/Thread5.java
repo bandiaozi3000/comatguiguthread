@@ -13,7 +13,7 @@ public class Thread5 {
 
     }
 
-    public synchronized void m2() {
+    public void m2() {
         System.out.println(Thread.currentThread().getName() + "m2 start");
         try {
             Thread.sleep(1000);
@@ -29,19 +29,19 @@ public class Thread5 {
         /**
          * 以下写法是Java8 lambda表达式,等同于下述写法
          */
-//        new Thread(()->thread5.m1(),"t1").start();
-//        new Thread(()->thread5.m2(),"t2").start();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                thread5.m1();
-            }
-        }, "t1").start();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                thread5.m1();
-            }
-        }, "t2").start();
+        new Thread(()->thread5.m1(),"t1").start();
+        new Thread(()->thread5.m2(),"t2").start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                thread5.m1();
+//            }
+//        }, "t1").start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                thread5.m1();
+//            }
+//        }, "t2").start();
     }
 }

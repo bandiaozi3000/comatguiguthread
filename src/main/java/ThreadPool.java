@@ -7,7 +7,7 @@ public class ThreadPool {
         for(int i = 0;i<6;i++){
             service.execute(()->{    //execute:执行结果没有返回值  submit:执行结果可以有返回值也可以没有
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -33,6 +33,7 @@ public class Future {
         System.out.println(f.isDone());
         System.out.println(f.get());
         System.out.println(f.isDone());
+        executorService.shutdown();
 
 
     }

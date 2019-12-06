@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -11,7 +12,7 @@ public class Thread17 {
         lock.lock();
         System.out.println("m1执行......");
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -22,6 +23,7 @@ public class Thread17 {
         lock.lock();
         System.out.println("m2执行......");
         lock.unlock();
+
     }
 
     public void m3(){
@@ -44,5 +46,7 @@ public class Thread17 {
         new Thread(()->thread17.m1(),"t1").start();
         new Thread(()->thread17.m2(),"t2").start();
         new Thread(()->thread17.m3(),"t3").start();
+        Random random = new Random();
+        random.nextInt(5);
     }
 }
